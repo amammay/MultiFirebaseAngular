@@ -4,12 +4,17 @@
 
 <section>
   <h2>Stuff from one database</h2>
-  <pre *ngIf="document$ | async as doc">
+  <pre *ngIf="helloWorldOne$ | async as doc">
   {{doc | json}}
   </pre>
 </section>
 
 <hr>
-
+<section>
+  <h2>Stuff from other database</h2>
+  <pre *ngIf="helloWorldTwo$ | async as doc">
+  {{doc | json}}
+  </pre>
+</section>
 
 <router-outlet></router-outlet>

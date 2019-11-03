@@ -5,14 +5,25 @@
 export const environment = {
   production: false,
   firebaseConfig: {
-    apiKey: 'yourvaluehere',
-    authDomain: 'yourvaluehere',
-    databaseURL: 'yourvaluehere',
-    projectId: 'yourvaluehere',
-    storageBucket: 'yourvaluehere',
-    messagingSenderId: 'yourvaluehere',
-    appId: 'yourvaluehere',
-    measurementId: 'yourvaluehere'
+    'PROJECT-ONE': {
+      apiKey: '',
+      authDomain: '',
+      databaseURL: '',
+      projectId: '',
+      storageBucket: '',
+      messagingSenderId: '',
+      appId: '',
+      measurementId: ''
+    },
+    'PROJECT-TWO': {
+      apiKey: '',
+      authDomain: '',
+      databaseURL: '',
+      projectId: '',
+      storageBucket: '',
+      messagingSenderId: '',
+      appId: ''
+    }
   }
 };
 

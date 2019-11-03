@@ -1,7 +1,8 @@
-import {Component} from '@angular/core';
+import {Component, Inject} from '@angular/core';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
+import {FIREBASE_REFERENCES} from './core/firestore-helper';
 
 @Component({
   selector: 'app-root',
@@ -11,21 +12,36 @@ import {map} from 'rxjs/operators';
 export class AppComponent {
 
 
-  readonly document$: Observable<{ [key: string]: any }>;
+  readonly helloWorldOne$: Observable<{ [key: string]: any }>;
+  readonly helloWorldTwo$: Observable<{ [key: string]: any }>;
 
-  constructor(private readonly afs: AngularFirestore) {
-    this.document$ = this.afs.collection('test', ref => ref
+
+  constructor(
+    @Inject(FIREBASE_REFERENCES.ONE_FIRESTORE) private readonly firstDb: AngularFirestore,
+    @Inject(FIREBASE_REFERENCES.TWO_FIRESTORE) private readonly secondDb: AngularFirestore,
+  ) {
+
+
+    this.helloWorldOne$ = this.prettyPrintChanges(this.firstDb.collection('test', ref => ref
       .where('hello', '==', 'world')
       .limit(10)
     )
-      .snapshotChanges()
-      .pipe(
-        map(documentsQueryResult =>
-          documentsQueryResult.map(document => ({
-            [document.payload.doc.id]: document.payload.doc.data()
-          })))
-      );
+      .snapshotChanges());
 
+    this.helloWorldTwo$ = this.prettyPrintChanges(this.secondDb.collection('test', ref => ref
+      .where('hello', '==', 'world')
+      .limit(10)
+    )
+      .snapshotChanges());
+  }
+
+  private prettyPrintChanges(obs: Observable<any>) {
+    return obs.pipe(
+      map(documentsQueryResult =>
+        documentsQueryResult.map(document => ({
+          [document.payload.doc.id]: document.payload.doc.data()
+        })))
+    );
   }
 
 }
