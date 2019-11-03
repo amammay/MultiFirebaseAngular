@@ -15,11 +15,11 @@ export const FIREBASE_REFERENCES = {
 export const FIREBASE_PROJECT_ONE = new InjectionToken('firebase project injector');
 export const FIREBASE_PROJECT_TWO = new InjectionToken('firebase project injector');
 
-function AngularFirestoreFactory(platformId: any, zone: NgZone, env: ENV, projectId: string) {
+export function AngularFirestoreFactory(platformId: any, zone: NgZone, env: ENV, projectId: string) {
   return new AngularFirestore(env.firebaseConfig[projectId], projectId, false, null, platformId, zone, null);
 }
 
-function AngularFireAuthFactory(platformId: any, zone: NgZone, env: ENV, projectId: string) {
+export function AngularFireAuthFactory(platformId: any, zone: NgZone, env: ENV, projectId: string) {
   return new AngularFireAuth(env.firebaseConfig[projectId], projectId, platformId, zone);
 }
 
