@@ -2,7 +2,7 @@ import {Component, Inject} from '@angular/core';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
-import {FIREBASE_REFERENCES} from './core/firestore-helper';
+import {FIREBASE_REFERENCES} from './core/firebase/firebase.module';
 
 @Component({
   selector: 'app-root',
