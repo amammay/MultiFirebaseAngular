@@ -1,5 +1,5 @@
 import {Component, Inject} from '@angular/core';
-import {AngularFirestore} from '@angular/fire/firestore';
+import {AngularFirestore, DocumentChangeAction} from '@angular/fire/firestore';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {FIREBASE_REFERENCES} from './core/firebase/firebase.module';
@@ -35,7 +35,7 @@ export class AppComponent {
       .snapshotChanges());
   }
 
-  private prettyPrintChanges(obs: Observable<any>) {
+  private prettyPrintChanges(obs: Observable<DocumentChangeAction<any>[]>) {
     return obs.pipe(
       map(documentsQueryResult =>
         documentsQueryResult.map(document => ({
